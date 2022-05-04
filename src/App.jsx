@@ -2,6 +2,9 @@ import colRef, { db } from "./firebase";
 import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
+import { UnorderedList } from "@chakra-ui/react";
+import Task from "./components/Task";
+
 function App() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
@@ -41,15 +44,11 @@ function App() {
       />
       <button onClick={addTask}>Add new task</button>
 
-      {tasks.map((task) => (
-        <div key={task.id}>
-          <p style={task.complete ? { color: "green" } : { color: "red" }}>
-            {task.title}
-          </p>
-          <button onClick={() => deleteTask(task.id)}>Delete task</button>
-          <button onClick={() => updateTask(task.id)}>Complete</button>
-        </div>
-      ))}
+      <UnorderedList>
+        {tasks.map((task) => (
+          <Task key={task.id} title={task.title} />
+        ))}
+      </UnorderedList>
     </div>
   );
 }
