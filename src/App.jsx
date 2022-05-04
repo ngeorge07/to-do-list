@@ -2,8 +2,8 @@ import colRef from "./functions/firebase";
 
 import { onSnapshot, orderBy, query } from "firebase/firestore";
 import { useState, useEffect } from "react";
-
-import { StackDivider, Flex, VStack, Heading } from "@chakra-ui/react";
+import { handleQueyDelete } from "./functions/restFunctions";
+import { StackDivider, Flex, VStack, Heading, Button } from "@chakra-ui/react";
 import InputTask from "./components/InputTask";
 import Task from "./components/Task";
 import ThemeButton from "./components/ThemeButton";
@@ -53,6 +53,8 @@ function App() {
             />
           ))}
         </VStack>
+
+        <Button onClick={handleQueyDelete}></Button>
       </Flex>
     </main>
   );

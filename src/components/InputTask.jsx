@@ -1,7 +1,7 @@
 import { FormControl, Input, Button, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 
-import addTask from "../functions/addTask";
+import { addTask } from "../functions/restFunctions";
 
 export default function InputTask({ id }) {
   const [input, setInput] = useState("");

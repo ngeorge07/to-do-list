@@ -1,7 +1,6 @@
 import { Checkbox, Flex, Button } from "@chakra-ui/react";
 
-import deleteTask from "../functions/deleteTask";
-import updateTask from "../functions/updateTask";
+import { deleteTask, updateTask } from "../functions/restFunctions";
 
 export default function Task({ title, id, isComplete }) {
   return (
