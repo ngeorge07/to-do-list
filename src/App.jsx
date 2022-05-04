@@ -1,5 +1,7 @@
-import colRef, { db } from "./firebase";
-import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
+import colRef from "./functions/firebase";
+import addTask from "./functions/addTask";
+
+import { onSnapshot } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 import { UnorderedList } from "@chakra-ui/react";
@@ -17,23 +19,6 @@ function App() {
     []
   );
 
-  const addTask = async () => {
-    await addDoc(colRef, {
-      title: input,
-      complete: false,
-    });
-  };
-
-  const deleteTask = async (id) => await deleteDoc(doc(db, "tasks", id));
-  const updateTask = async (id) =>
-    await setDoc(
-      doc(db, "tasks", id),
-      {
-        complete: true,
-      },
-      { merge: true }
-    );
-
   return (
     <div className="App">
       <input
@@ -42,11 +27,16 @@ function App() {
         onChange={(e) => setInput(e.target.value)}
         value={input}
       />
-      <button onClick={addTask}>Add new task</button>
+      <button onClick={() => addTask(input)}>Add new task</button>
 
       <UnorderedList>
         {tasks.map((task) => (
-          <Task key={task.id} title={task.title} />
+          <Task
+            key={task.id}
+            title={task.title}
+            id={task.id}
+            isComplete={task.complete}
+          />
         ))}
       </UnorderedList>
     </div>
