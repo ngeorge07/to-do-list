@@ -5,11 +5,11 @@ import { onSnapshot } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 import { UnorderedList } from "@chakra-ui/react";
+import InputTask from "./components/InputTask";
 import Task from "./components/Task";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [input, setInput] = useState("");
 
   useEffect(
     () =>
@@ -21,15 +21,17 @@ function App() {
 
   return (
     <div className="App">
-      <input
+      {/* <input
         type="text"
         name="task"
         onChange={(e) => setInput(e.target.value)}
         value={input}
       />
-      <button onClick={() => addTask(input)}>Add new task</button>
+      <button onClick={() => addTask(input)}>Add new task</button> */}
 
-      <UnorderedList>
+      <InputTask />
+
+      <UnorderedList styleType="none">
         {tasks.map((task) => (
           <Task
             key={task.id}
