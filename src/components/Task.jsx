@@ -1,12 +1,13 @@
-import { Checkbox, ListItem, Button } from "@chakra-ui/react";
+import { Checkbox, Flex, Button } from "@chakra-ui/react";
 
 import deleteTask from "../functions/deleteTask";
 import updateTask from "../functions/updateTask";
 
-export default function Task({ title, id }) {
+export default function Task({ title, id, isComplete }) {
   return (
-    <ListItem>
+    <Flex as="li" justify="space-between" w="100%">
       <Checkbox
+        isChecked={isComplete ? true : false}
         onChange={(e) =>
           e.target.checked ? updateTask(id, true) : updateTask(id, false)
         }
@@ -14,6 +15,6 @@ export default function Task({ title, id }) {
         {title}
       </Checkbox>
       <Button onClick={() => deleteTask(id)}>Delete</Button>
-    </ListItem>
+    </Flex>
   );
 }
