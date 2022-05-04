@@ -5,7 +5,6 @@ const addTask = async (input) => {
   await addDoc(colRef, {
     title: input,
     complete: false,
-    //test2
   });
 };
 
