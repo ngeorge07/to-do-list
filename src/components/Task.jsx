@@ -11,10 +11,13 @@ export default function Task({ title, id, isComplete }) {
         onChange={(e) =>
           e.target.checked ? updateTask(id, true) : updateTask(id, false)
         }
+        textDecoration={isComplete ? "line-through" : "none"}
       >
         {title}
       </Checkbox>
-      <Button onClick={() => deleteTask(id)}>Delete</Button>
+      <Button colorScheme="red" onClick={() => deleteTask(id)}>
+        Delete
+      </Button>
     </Flex>
   );
 }
