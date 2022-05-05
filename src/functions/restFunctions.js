@@ -29,7 +29,7 @@ export const updateTask = async (id, bool) =>
 
 export const deleteTask = async (id) => await deleteDoc(doc(db, "tasks", id));
 
-export const handleQueyDelete = async () => {
+export const deleteQuery = async () => {
   const q = query(colRef, where("complete", "==", true));
 
   const snapshot = await getDocs(q);

@@ -1,15 +1,16 @@
 import colRef from "./functions/firebase";
-
 import { onSnapshot, orderBy, query } from "firebase/firestore";
+
 import { useState, useEffect } from "react";
-import { handleQueyDelete } from "./functions/restFunctions";
 import { StackDivider, Flex, VStack, Heading, Button } from "@chakra-ui/react";
+
 import InputTask from "./components/InputTask";
 import Task from "./components/Task";
 import ThemeButton from "./components/ThemeButton";
+import FiltersBtn from "./components/FiltersBtn";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([{ id: "loading" }]);
 
   useEffect(() => {
     const q = query(colRef, orderBy("createdAt", "desc"));
@@ -31,7 +32,7 @@ function App() {
         gap="10"
         align="center"
         maxW="md"
-        w={["80%", 400, 500]}
+        w={["80%", 400, 600]}
         mx="auto"
       >
         <ThemeButton />
@@ -44,17 +45,28 @@ function App() {
           ms="0"
           divider={<StackDivider borderColor="gray.200" />}
         >
-          {tasks.map((task) => (
-            <Task
-              key={task.id}
-              title={task.title}
-              id={task.id}
-              isComplete={task.complete}
-            />
-          ))}
+          {tasks.map((task) =>
+            task.id === "loading" ? (
+              <Button
+                isLoading
+                colorScheme="cyan"
+                variant="solid"
+                key="loading"
+              >
+                Loading
+              </Button>
+            ) : (
+              <Task
+                key={task.id}
+                title={task.title}
+                id={task.id}
+                isComplete={task.complete}
+              />
+            )
+          )}
         </VStack>
 
-        <Button onClick={handleQueyDelete}></Button>
+        <FiltersBtn setTasks={setTasks} />
       </Flex>
     </main>
   );
