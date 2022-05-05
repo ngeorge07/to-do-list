@@ -4,7 +4,7 @@ import { deleteQuery } from "../functions/restFunctions";
 
 import { RadioGroup, Radio, HStack, Button, Flex } from "@chakra-ui/react";
 
-export default function FiltersBtn({ setTasks, tasks }) {
+export default function FiltersBtn({ setTasks }) {
   const handleQuery = async (field, operator, value) => {
     const q = query(
       colRef,
@@ -43,10 +43,6 @@ export default function FiltersBtn({ setTasks, tasks }) {
           </Radio>
         </HStack>
       </RadioGroup>
-
-      <Button colorScheme="red" onClick={deleteQuery} w="fit-content">
-        Clear Completed
-      </Button>
     </Flex>
   );
 }

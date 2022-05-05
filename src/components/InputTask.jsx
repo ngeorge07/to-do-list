@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 
 import { addTask } from "../functions/restFunctions";
 
-export default function InputTask({ id }) {
+export default function InputTask() {
   const [input, setInput] = useState("");
   const handleInputChange = (e) => setInput(e.target.value);
   const inputRef = useRef(null);

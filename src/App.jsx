@@ -1,13 +1,20 @@
 import colRef from "./functions/firebase";
-import { onSnapshot, orderBy, query } from "firebase/firestore";
+import { onSnapshot, orderBy, query, where } from "firebase/firestore";
 
 import { useState, useEffect } from "react";
-import { StackDivider, Flex, VStack, Heading, Button } from "@chakra-ui/react";
+import {
+  StackDivider,
+  Flex,
+  VStack,
+  Heading,
+  Button,
+  Text,
+} from "@chakra-ui/react";
 
 import InputTask from "./components/InputTask";
 import Task from "./components/Task";
 import ThemeButton from "./components/ThemeButton";
-import FiltersBtn from "./components/FiltersBtn";
+import ClearComplete from "./components/ClearComplete";
 
 function App() {
   const [tasks, setTasks] = useState([{ id: "loading" }]);
@@ -46,36 +53,39 @@ function App() {
         mx="auto"
       >
         <InputTask />
+        {tasks.length === 0 ? (
+          <Text>- Add a new task -</Text>
+        ) : (
+          <VStack
+            as="section"
+            w="100%"
+            spacing="5"
+            ms="0"
+            divider={<StackDivider borderColor="gray.200" />}
+          >
+            {tasks.map((task) =>
+              task.id === "loading" ? (
+                <Button
+                  isLoading
+                  colorScheme="cyan"
+                  variant="solid"
+                  key="loading"
+                >
+                  Loading
+                </Button>
+              ) : (
+                <Task
+                  key={task.id}
+                  title={task.title}
+                  id={task.id}
+                  isComplete={task.complete}
+                />
+              )
+            )}
+          </VStack>
+        )}
 
-        <VStack
-          as="ul"
-          w="100%"
-          spacing="5"
-          ms="0"
-          divider={<StackDivider borderColor="gray.200" />}
-        >
-          {tasks.map((task) =>
-            task.id === "loading" ? (
-              <Button
-                isLoading
-                colorScheme="cyan"
-                variant="solid"
-                key="loading"
-              >
-                Loading
-              </Button>
-            ) : (
-              <Task
-                key={task.id}
-                title={task.title}
-                id={task.id}
-                isComplete={task.complete}
-              />
-            )
-          )}
-        </VStack>
-
-        <FiltersBtn setTasks={setTasks} tasks={tasks} />
+        <ClearComplete />
       </Flex>
     </main>
   );
