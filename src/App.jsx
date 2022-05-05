@@ -37,7 +37,7 @@ function App() {
         mx="auto"
         my={10}
       >
-        <Heading as="h1" size="xl" align="center">
+        <Heading as="h1" size="xl">
           To-do List
         </Heading>
         <ThemeButton />
