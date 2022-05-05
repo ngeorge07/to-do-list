@@ -23,9 +23,19 @@ function App() {
 
   return (
     <main>
-      <Heading as="h1" size="xl" align="center">
-        Todo List
-      </Heading>
+      <Flex
+        justify="space-between"
+        maxW="md"
+        w={["80%", 400, 600]}
+        mx="auto"
+        my={10}
+      >
+        <Heading as="h1" size="xl" align="center">
+          Todo List
+        </Heading>
+        <ThemeButton />
+      </Flex>
+
       <Flex
         as="section"
         flexDirection="column"
@@ -35,7 +45,6 @@ function App() {
         w={["80%", 400, 600]}
         mx="auto"
       >
-        <ThemeButton />
         <InputTask />
 
         <VStack
@@ -66,7 +75,7 @@ function App() {
           )}
         </VStack>
 
-        <FiltersBtn setTasks={setTasks} />
+        <FiltersBtn setTasks={setTasks} tasks={tasks} />
       </Flex>
     </main>
   );
